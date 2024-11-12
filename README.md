@@ -13,3 +13,14 @@ SAMPart3D is able to segment any 3D object into semantic parts across multiple l
 ### Visualization of 3D part editing.
 
 ![](assets/part-editing.png)
+
+## Citation
+If you find _SAMPart3D_ useful in your project, please cite our work. :)
+```
+@article{yang2024sampart3d,
+      title={SAMPart3D: Segment Any Part in 3D Objects}, 
+      author={Yunhan Yang and Yukun Huang and Yuan-Chen Guo and Liangjun Lu and Xiaoyang Wu and Edmund Y. Lam and Yan-Pei Cao and Xihui Liu},
+      journal={arXiv preprint arXiv:2411.07184},
+      year={2024},
+}
+```
