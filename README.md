@@ -19,7 +19,7 @@ If you find _SAMPart3D_ useful in your project, please cite our work. :)
 ```
 @article{yang2024sampart3d,
       title={SAMPart3D: Segment Any Part in 3D Objects}, 
-      author={Yunhan Yang and Yukun Huang and Yuan-Chen Guo and Liangjun Lu and Xiaoyang Wu and Edmund Y. Lam and Yan-Pei Cao and Xihui Liu},
+      author={Yang, Yunhan and Huang, Yukun and Guo, Yuan-Chen and Lu, Liangjun and Wu, Xiaoyang and Lam, Edmund Y. and Cao, Yan-Pei and Liu, Xihui},
       journal={arXiv preprint arXiv:2411.07184},
       year={2024},
 }
