@@ -1,5 +1,5 @@
 # SAMPart3D
-## [Project Page](https://yhyang-myron.github.io/SAMPart3D-website/) | [Paper]()
+## [Project Page](https://yhyang-myron.github.io/SAMPart3D-website/) | [Paper](https://arxiv.org/abs/2411.07184v1)
 
 **Codes will be coming soon.**
 
