@@ -72,9 +72,9 @@ sh scripts/eval.sh -g 1 -d sampart3d -n knight -w 5000
 ```
 
 ### 3. Highlight 3D segments on multi-view renderings
-Set **render_dir**, **mesh_path**, **results_dir**, **save_dir** in `tools/hightlight_parts.py`.
+Set **render_dir**, **mesh_path**, **results_dir**, **save_dir** in `tools/highlight_parts.py`.
 ```bash
-python tools/hightlight_parts.py
+python tools/highlight_parts.py
 ```
 
 ## 📚 Dataset: PartObjaverse-Tiny
