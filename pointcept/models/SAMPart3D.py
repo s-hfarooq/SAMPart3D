@@ -99,7 +99,6 @@ class SAMPart3D(nn.Module):
                 self.init_feat = point_feat
                 del self.backbone
         
-        # !!!!
         point_orgfeat_mapping = pcd_dict["feat"][input_dict["mapping"]]
         point_selected_feat = self.init_feat[input_dict["mapping"]]
 
@@ -131,12 +130,7 @@ class SAMPart3D(nn.Module):
         block_mask = torch.triu(block_mask, diagonal=0)  
         # Only consider pairs where both points are valid (-1 means not in mask / invalid)
         block_mask = block_mask * (labels1_expanded != -1) * (labels2_expanded != -1)
-
-        # Mask for diagonal elements (i.e., pairs of the same point).
-        # Don't consider these pairs for grouping supervision (pulling), since they are trivially similar.
         diag_mask = torch.eye(block_mask.shape[0], device=self.device, dtype=bool)
-
-        # hash_rendered = outputs["instance_hash"]
         scale = input_dict["scale"].view(-1, 1)
 
         ####################################################################################
@@ -145,7 +139,6 @@ class SAMPart3D(nn.Module):
         total_loss = 0
 
         # 1. If (A, s_A) and (A', s_A) in same group, then supervise the features to be similar
-        # Note that `use_single_scale` (for ablation only) causes grouping_field to ignore the scale input.
         instance = self.get_mlp(point_selected_feat, scale)
         pose_emb = self.pos_emb(point_orgfeat_mapping, scale)
         instance = instance + pose_emb
@@ -158,7 +151,7 @@ class SAMPart3D(nn.Module):
         loss_weight_pos = torch.sum(mask_full_positive * block_mask * (~diag_mask)) / torch.sum(block_mask)
         total_loss += instance_loss_1 * loss_weight_pos
 
-        # 2. If ", then also supervise them to be similar at s > s_A
+        # 2. If (A, s_A) and (A', s_A) in same group, then also supervise them to be similar at s > s_A
         if self.use_hierarchy_losses:
             scale_diff = torch.max(
                 torch.zeros_like(scale), (self.max_grouping_scale - scale)
@@ -187,8 +180,6 @@ class SAMPart3D(nn.Module):
                 margin - torch.norm(instance[mask[0]] - instance[mask[1]], p=2, dim=-1)
             )
         ).nan_to_num(0).mean()
-        # if torch.isinf(instance_loss_4):
-        #     instance_loss_4 = torch.tensor(0.0).to(self.device)
         loss_weight_neg = torch.sum(mask_full_negative * block_mask) / torch.sum(block_mask)
         total_loss += instance_loss_3 * loss_weight_neg
 
@@ -219,8 +210,7 @@ class SAMPart3D(nn.Module):
                     self.backbone.eval()
                     point = self.backbone(data_dict)
                     point_feat = point.feat
-                    # self.init_feat = point_feat
-                    # del self.backbone
+
             else:
                 point_feat = self.init_feat
 
