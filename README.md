@@ -11,7 +11,7 @@ Please refer to [INSTALL.md](INSTALL.md).
 
 ### Preparation for training
 
-1. Download pretrained PTv3-object [here](https://huggingface.co/yhyang-myron/SAMPart3D).
+1. Download pretrained PTv3-object [here](https://huggingface.co/yhyang-myron/SAMPart3D/tree/main).
 
 2. Data prepocessing
 
