@@ -1,6 +1,6 @@
 # SAMPart3D: Segment Any Part in 3D Objects
 
-## [Project Page](https://yhyang-myron.github.io/SAMPart3D-website/) | [Paper](https://arxiv.org/abs/2411.07184v1) | [Dataset: PartObjaverse-Tiny](PartObjaverse-Tiny/PartObjaverse-Tiny.md)
+## [Project Page](https://yhyang-myron.github.io/SAMPart3D-website/) | [Paper](https://arxiv.org/abs/2411.07184) | [Dataset: PartObjaverse-Tiny](PartObjaverse-Tiny/PartObjaverse-Tiny.md)
 
 ![](assets/teaser.png)
 
