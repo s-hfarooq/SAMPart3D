@@ -15,3 +15,5 @@ outputs/
 **/*.out
 Dockerfile
 debug_pcd
+.cog/*
+*.glb

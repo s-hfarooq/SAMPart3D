@@ -1,0 +1,27 @@
+# Core dependencies for SAMPart3D Cog implementation
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
+Pillow
+opencv-python
+transformers
+einops
+scikit-learn
+tensorboard
+tensorboardx
+yapf
+addict
+scipy
+timm
+open3d
+trimesh
+torch-scatter
+spconv-cu120
+flash-attn
+ninja
+matplotlib
+cog
+
+# Optional RAPIDS dependencies (will fallback to sklearn if not available)
+# cudf-cu11==24.6.*
+# cuml-cu11==24.6.*

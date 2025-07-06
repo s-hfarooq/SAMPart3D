@@ -1,0 +1,33 @@
+build:
+  gpu: true
+  cuda: "12.1"
+  python_version: "3.10"
+  system_packages:
+    - "ffmpeg"
+    - "libsm6"
+    - "libxext6"
+    - "libxrender-dev"
+    - "libglib2.0-0"
+    - "libgl1-mesa-glx"
+    - "wget"
+    - "git"
+    - "ninja-build"
+    - "build-essential"
+    - "pkg-config"
+  run:
+    - pip install --upgrade pip setuptools wheel
+    - pip install "numpy<2.0.0"
+    - pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+    - pip install Pillow opencv-python transformers einops scikit-learn tensorboard tensorboardx yapf addict scipy timm open3d trimesh matplotlib
+    - pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+    - pip install spconv-cu120
+    - pip install flash-attn==2.3.6 --no-build-isolation || echo "Flash Attention installation failed, model will use standard attention"
+    - pip install ninja
+    - export TCNN_CUDA_ARCHITECTURES="86" && pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch || echo "Trying with compute capability 80"
+    - export TCNN_CUDA_ARCHITECTURES="80" && pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch || echo "Trying with compute capability 75"
+    - export TCNN_CUDA_ARCHITECTURES="75" && pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch || echo "Warning tiny-cuda-nn installation failed, some features may not work"
+    - pip install --extra-index-url=https://pypi.nvidia.com cudf-cu11==24.6.* cuml-cu11==24.6.* || echo "RAPIDS installation failed, will use sklearn fallback"
+    # Skip pointops compilation for now - will be handled in predict.py
+    - echo "Skipping pointops compilation during build"
+
+predict: "predict.py:Predictor"

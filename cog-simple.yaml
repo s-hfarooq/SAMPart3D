@@ -1,0 +1,32 @@
+build:
+  gpu: true
+  cuda: "12.1"
+  python_version: "3.10"
+  system_packages:
+    - "ffmpeg"
+    - "libsm6"
+    - "libxext6"
+    - "libxrender-dev"
+    - "libglib2.0-0"
+    - "libgl1-mesa-glx"
+    - "wget"
+    - "git"
+    - "build-essential"
+  run:
+    # Update pip and install basic tools
+    - pip install --upgrade pip setuptools wheel ninja
+    # Install PyTorch with CUDA support
+    - pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+    # Install core dependencies
+    - pip install Pillow opencv-python transformers einops scikit-learn addict scipy timm open3d trimesh matplotlib
+    # Install torch-scatter with CUDA support
+    - pip install torch-scatter -f https://data.pyg.org/whl/torch-2.1.0+cu121.html
+    # Install spconv (essential for the model)
+    - pip install spconv-cu120
+    # Skip Flash Attention for now - model will use standard attention
+    # Skip tiny-cuda-nn for now - will implement fallback
+    # Skip RAPIDS - will use sklearn
+    # Build pointops (essential for PTv3)
+    - cd libs/pointops && python setup.py install && cd ../..
+
+predict: "predict-simple.py:Predictor"
